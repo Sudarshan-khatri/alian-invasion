@@ -1,29 +1,36 @@
-import sys
+# import the module pygame for create the game
 import pygame
-from settings import Settings
-# create a class to make window for game
-class alian_invasion:
-    # create the behavior and assets of game
-    def __init__(self):
-        pygame.init()
-        self.screen=pygame.display.set_mode(self.setting)
-        pygame.display.set_caption("ALIAN INVASION")
-        self.clock=pygame.time.Clock()
-        self.bg_color=(230,140,230)
+# initialize the system for game
+pygame.init()
+#create teh window of game 
+screen=pygame.display.set_mode((800,650))
+# set the game name 
+pygame.display.set_caption("Alian Invasion")
+# set the image on window 
+w_img=pygame.image.load('alian.png')
+pygame.display.set_icon(w_img)
+# initialize the background color
+bg_color=(230,167,255)
+#set the first player in window
+player_img=pygame.image.load('rocket.png')
+playerX=365
+playerY=575
 
-    def run_game(self):
-        # start the main loop for the game
-        while True:
-            # watch the mouse and keyboard
-            for event in pygame.event.get():
-                if event.type==pygame.QUIT:
-                   sys.exit()
-            # make draw the screen visible
-            pygame.display.flip()
-            # pygame.clock.tick()
-            self.screen.fill(self.bg_color)
+# player function 
+def f_player():
+    screen.blit(player_img,(playerX,playerY))
+# use while loop for run the game untill quit the game 
+running=True 
+while running:
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            running=False
+    #set the background color
+    screen.fill(bg_color)
+    # call the function
+    f_player()
+   
+    #update the display
+    pygame.display.flip()
+pygame.display.update()
 
-if __name__ == '__main__':
-    # make a game instance and run the game
-    ai=alian_invasion()
-    ai.run_game()
